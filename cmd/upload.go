@@ -85,6 +85,17 @@ func uploadFile(src string, dst string) (err error) {
 	return
 }
 
+func uploadDir(src string, dst string) (err error) {
+	err = filepath.Walk(src, func(filepath string, info os.FileInfo, err error) error {
+		if !info.IsDir() {
+			fmt.Println(dst + path.Base(filepath))
+			return uploadFile(filepath, dst+path.Base(filepath))
+		}
+		return err
+	})
+	return
+}
+
 func upload(cmd *cobra.Command, args []string) (err error) {
 	if len(args) == 0 || len(args) > 2 {
 		return errors.New("`upload` requires `src` and/or `dst` arguments")

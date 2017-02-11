@@ -96,14 +96,17 @@ func upload(cmd *cobra.Command, args []string) (err error) {
 		return
 	}
 
-	if srcInfo.IsDir() {
-		fmt.Print(path.Base(src))
-	} else {
-		dst := "/" + path.Base(src)
-		return uploadFile(src, dst)
+	dst := "/"
+	if len(args) == 2 {
+		dst = args[1]
 	}
 
-	return
+	if srcInfo.IsDir() {
+		return uploadDir(src, dst)
+	} else {
+		dst := dst + path.Base(src)
+		return uploadFile(src, dst)
+	}
 }
 
 var uploadCmd = &cobra.Command{

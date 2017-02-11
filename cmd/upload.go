@@ -74,6 +74,9 @@ func uploadFile(src string, dst string) (err error) {
 	// if contentsInfo.Size() > chunkSize {
 	// 	return uploadChunkedFile()
 	// }
+	if contentsInfo.Size() > chunkSize {
+		return uploadChunkedFile(dbx, progressbar, commitInfo, contentsInfo.Size())
+	}
 
 	if _, err = dbx.Upload(commitInfo, progressbar); err != nil {
 		return

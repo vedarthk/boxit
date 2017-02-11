@@ -44,6 +44,15 @@ func uploadChunkedFile(dbx files.Client, r io.Reader, commitInfo *files.CommitIn
 	return
 }
 
+func fileExists(dbx files.Client, dst string) bool {
+	arg := files.NewGetMetadataArg(dst)
+
+	if _, err := dbx.GetMetadata(arg); err != nil {
+		return false
+	}
+	return true
+}
+
 func uploadFile(src string, dst string) (err error) {
 	contents, err := os.Open(src)
 	defer contents.Close()

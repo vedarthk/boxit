@@ -71,9 +71,16 @@ func uploadFile(src string, dst string) (err error) {
 
 	dbx := files.New(config)
 
-	// if contentsInfo.Size() > chunkSize {
-	// 	return uploadChunkedFile()
-	// }
+	err = checkDirExists(dbx, path.Dir(dst))
+	if err != nil {
+		return
+	}
+
+	if fileExists(dbx, dst) {
+		fmt.Println("File exists!")
+		return
+	}
+
 	if contentsInfo.Size() > chunkSize {
 		return uploadChunkedFile(dbx, progressbar, commitInfo, contentsInfo.Size())
 	}

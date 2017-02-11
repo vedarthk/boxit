@@ -1,0 +1,42 @@
+hash: 1e792693118a87834b3c40e4ca12e2aa54c8b9c5308870695b1d68c00d0d6996
+updated: 2017-02-11T21:37:01.756721147Z
+imports:
+- name: github.com/dropbox/dropbox-sdk-go-unofficial
+  version: 710d12eade8c4cd17ed096a058f182f5d6dea0a8
+  subpackages:
+  - dropbox
+- name: github.com/dustin/go-humanize
+  version: 7a41df006ff9af79a29f0ffa9c5f21fbe6314a2d
+- name: github.com/golang/protobuf
+  version: 8ee79997227bf9b34611aee7946ae64735e6fd93
+  subpackages:
+  - proto
+- name: github.com/inconshreveable/mousetrap
+  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/mitchellh/go-homedir
+  version: b8bc1bf767474819792c23f32d8286a45736f1c6
+- name: github.com/mitchellh/ioprogress
+  version: 8163955264568045f462ae7e2d6d07b2001fc997
+- name: github.com/spf13/cobra
+  version: b5d8e8f46a2f829f755b6e33b454e25c61c935e1
+- name: github.com/spf13/pflag
+  version: 9ff6c6923cfffbcd502984b8e0c80539a94968b7
+- name: golang.org/x/net
+  version: 61557ac0112b576429a0df080e1c2cef5dfbb642
+  subpackages:
+  - context
+- name: golang.org/x/oauth2
+  version: de0725b330ab43c1a3d6c84d961cf01183783f1e
+  subpackages:
+  - internal
+- name: google.golang.org/appengine
+  version: 2e4a801b39fc199db615bfca7d0b9f8cd9580599
+  subpackages:
+  - internal
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
+testImports: []

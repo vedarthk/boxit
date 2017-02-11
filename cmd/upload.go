@@ -44,6 +44,26 @@ func uploadChunkedFile(dbx files.Client, r io.Reader, commitInfo *files.CommitIn
 	return
 }
 
+func checkDirExists(dbx files.Client, dst string) (err error) {
+	arg := files.NewListFolderArg(dst)
+
+	_, err = dbx.ListFolder(arg)
+	if err != nil {
+		switch e := err.(type) {
+		case files.ListFolderAPIError:
+			if e.EndpointError.Path.Tag == files.LookupErrorNotFound {
+				arg := files.NewCreateFolderArg(dst)
+				if _, err = dbx.CreateFolder(arg); err != nil {
+					return
+				}
+			}
+		default:
+			return err
+		}
+	}
+	return
+}
+
 func fileExists(dbx files.Client, dst string) bool {
 	arg := files.NewGetMetadataArg(dst)
 

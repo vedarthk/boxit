@@ -89,7 +89,7 @@ func uploadFile(src string, dst string) (err error) {
 	progressbar := &ioprogress.Reader{
 		Reader: contents,
 		DrawFunc: ioprogress.DrawTerminalf(os.Stderr, func(progress, total int64) string {
-			return fmt.Sprintf("Uploading %s/%s", humanize.IBytes(uint64(progress)), humanize.IBytes(uint64(total)))
+			return fmt.Sprintf("Uploading %s %s/%s", path.Base(src), humanize.IBytes(uint64(progress)), humanize.IBytes(uint64(total)))
 		}),
 		Size: contentsInfo.Size(),
 	}

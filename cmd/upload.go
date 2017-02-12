@@ -123,10 +123,10 @@ func uploadFile(src string, dst string) (err error) {
 }
 
 func uploadDir(src string, dst string) (err error) {
+	var files []string
 	err = filepath.Walk(src, func(filepath string, info os.FileInfo, err error) error {
 		if !info.IsDir() {
-			fmt.Println(dst + path.Base(filepath))
-			return uploadFile(filepath, dst+path.Base(filepath))
+			files = append(files, filepath)
 		}
 		return err
 	})

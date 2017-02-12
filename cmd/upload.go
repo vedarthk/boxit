@@ -130,6 +130,36 @@ func uploadDir(src string, dst string) (err error) {
 		}
 		return err
 	})
+
+	if len(files) > 1 {
+		maxChannels := 4
+		if len(files) < maxChannels {
+			maxChannels = len(files)
+		}
+		var channels []chan string
+		chanOut := make(chan int)
+		for i := 0; i < maxChannels; i++ {
+			ch := make(chan string)
+			channels = append(channels, ch)
+			go func(index int) {
+				for {
+					filepath := <-ch
+					uploadFile(filepath, dst+path.Base(filepath))
+					chanOut <- index
+				}
+			}(i)
+			ch <- files[i]
+		}
+
+		for _, f := range files[maxChannels:] {
+			select {
+			case chanIndex := <-chanOut:
+				channels[chanIndex] <- f
+			}
+		}
+
+	}
+
 	return
 }
 

@@ -107,7 +107,7 @@ func uploadFile(src string, dst string) (err error) {
 	}
 
 	if fileExists(dbx, dst) {
-		fmt.Println("File exists!")
+		fmt.Printf("%s exists!\n", path.Base(src))
 		return
 	}
 

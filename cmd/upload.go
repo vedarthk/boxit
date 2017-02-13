@@ -158,8 +158,10 @@ func uploadDir(src string, dst string) (err error) {
 			}
 		}
 
+	} else {
+		filepath := files[0]
+		return uploadFile(filepath, dst+path.Base(filepath))
 	}
-
 	return
 }
 
